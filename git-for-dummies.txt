@@ -1,0 +1,8 @@
+----- RUN PYTHON FILE ----
+python main.py 
+python (ANY FILE NAME)
+
+----- SAVE CHANGES TO REPOSITORY ( MUST DO AT END OF PERIOD EVERY TIME ) -----
+git add . 
+git commit -m "commit message" 
+git push origin main 

@@ -1,0 +1,73 @@
+sudo apt update && sudo apt install -y mysql-server  ----- only needs ran once / dont run again 
+
+-----------------------------------------------------------------------------------------------------
+
+sudo service mysql start
+sudo service mysql status
+sudo mysql -u root -p
+
+
+CREATE USER 'adi'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON products.* TO 'adi'@'localhost';
+FLUSH PRIVILEGES;
+
+ALTER USER 'adi'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+FLUSH PRIVILEGES;
+
+
+---- create db ----- run once
+
+CREATE DATABASE music_database;   ----- only needs ran once / dont run again 
+
+USE music_database;
+
+---- only needs ran once / dont run again 
+CREATE TABLE Scales (
+    scale_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    root VARCHAR(10) NOT NUll,
+    type VARCHAR(10) NOT NUll
+);
+
+CREATE TABLE Notes (
+    scale_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(10) NOT NULL,
+    pitch INT NOT NUll,
+);
+
+CREATE TABLE ScaleNotes (
+    scale_id INT,
+    note_id INT,
+    pitch INT NOT NUll,
+    PRIMARY KEY (scale_id, note_id),
+    FOREIGN KEY (scale_id) REFERENCES Scales(scale_id),
+    FOREIGN KEY (note_id) REFERENCES Notes(note_id)
+);
+
+CREATE TABLE Chords (
+    chord_id INT AUTO_INCREMENT PRIMARY KEY,
+    scale_id INT,
+    name VARCHAR(50) NOT NULL,
+    FOREIGN KEY (scale_id) REFERENCES Scales(scale_id)
+);
+
+CREATE TABLE ChordTones (
+    chord_id INT,
+    note_id INT,
+    pitch INT NOT NULL,
+    PRIMARY KEY (chord_id, note_id),
+    FOREIGN KEY (chord_id) REFERENCES Chords(chord_id),
+    FOREIGN KEY (note_id) REFERENCES Notes(note_id)
+);
+
+CREATE TABLE MIDI_Files (
+    midi_id INT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(100) NOT NULL,
+    size INT NOT NULL,
+    duration INT NOT NULL,
+);
+
+---- access db ----
+USE scales_database;
+
+SELECT * FROM scales;
