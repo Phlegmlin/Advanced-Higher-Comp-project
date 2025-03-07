@@ -65,6 +65,7 @@ CREATE TABLE MIDI_Files (
     filename VARCHAR(100) NOT NULL,
     size INT NOT NULL,
     duration INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ---- access db ----
