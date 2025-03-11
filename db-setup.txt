@@ -30,7 +30,7 @@ CREATE TABLE Scales (
 );
 
 CREATE TABLE Notes (
-    scale_id INT AUTO_INCREMENT PRIMARY KEY,
+    note_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(10) NOT NULL,
     pitch INT NOT NUll
 );
@@ -67,6 +67,20 @@ CREATE TABLE MIDI_Files (
     duration INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO Scales (name, root, type)
+VALUES ("C Major", "C", "Major")
+
+INSERT INTO Notes (name, pitch)
+VALUES ("C", 60), ("C#", 61), ("D", 62), ("D#", 63), ("E", 64), ("F", 65), ("F#", 66), ("G", 67), ("G#", 68), ("A", 69), ("A#", 70), ("B", 71);
+
+DROP TABLE ScaleNotes;
+DROP TABLE Chords;
+DROP TABLE ChordTones;
+DROP TABLE MIDI_Files;
+DROP TABLE Notes;
+DROP TABLE Scales;
+
 
 ---- access db ----
 USE scales_database;
