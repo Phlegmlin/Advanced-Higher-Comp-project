@@ -74,6 +74,15 @@ VALUES ("C Major", "C", "Major")
 INSERT INTO Notes (name, pitch)
 VALUES ("C", 60), ("C#", 61), ("D", 62), ("D#", 63), ("E", 64), ("F", 65), ("F#", 66), ("G", 67), ("G#", 68), ("A", 69), ("A#", 70), ("B", 71);
 
+INSERT INTO ScaleNotes (scale_id, note_id, pitch)
+VALUES (1, 1, 60), (1, 3, 62), (1, 5, 64), (1, 6, 65), (1, 8, 67), (1, 10, 69), (1, 12, 71)
+
+INSERT INTO Chords (scale_id, name)
+VALUES (1, "C Major"), (1, "D Minor"), (1, "E Minor"), (1, "F Major)
+
+INSERT INTO ChordTones (chord_id, note_id, pitch)
+VALUES (1, 1, 60), (1, 5, 64), (1, 8, 67)
+
 DROP TABLE ScaleNotes;
 DROP TABLE Chords;
 DROP TABLE ChordTones;
