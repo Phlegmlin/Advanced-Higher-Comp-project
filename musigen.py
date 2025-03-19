@@ -100,16 +100,23 @@ class MIDIFileManager:
 
     def write_melody(self, melody):
         for note in melody:
-            self.melody_track.append(Message('note_on', note=note.pitch, velocity=64, time=480))
-            self.melody_track.append(Message('note_off', note=note.pitch, velocity=64, time=480))
+            self.melody_track.append(Message('note_on', note=note.pitch, velocity=64, time=0))
+            self.melody_track.append(Message('note_off', note=note.pitch, velocity=64, time=480))  # Matches quarter note length
 
-    def write_chords(self, chords):
-        for chord in chords:
-            for note in chord:
-                self.chord_track.append(Message('note_on', note=note.pitch, velocity=64, time=0))
+    def write_chords(self, melody, chords):
+        for i in range(len(melody)):  # Ensure chords align with melody
+            chord = chords[i]  # Get corresponding chord for the melody note
             
-            # Instead of time=0, match melody note duration (480)
-            self.chord_track.append(Message('note_off', note=chord[0].pitch, velocity=64, time=480))
+            # Start all chord notes exactly when melody starts
+            for chord_note in chord:
+                self.chord_track.append(Message('note_on', note=chord_note.pitch, velocity=64, time=0))
+
+            # Stop all chord notes exactly when melody stops
+            for chord_note in chord:
+                self.chord_track.append(Message('note_off', note=chord_note.pitch, velocity=64, time=0))  # Ensure same timing
+            
+            # Ensure proper time spacing between notes and chords
+            self.chord_track.append(Message('note_off', note=chord[0].pitch, velocity=0, time=480))  # Move to next note timing
 
     def save_file(self):
         self.mid.save(self.filename)
@@ -118,8 +125,8 @@ class MIDIFileManager:
 ##MAIN##
 def main():
     print("Running Musigen \n")
-    scale_name = input("Enter scale (C Ionian, D Dorian, etc.): ")
-    length = int(input("Enter melody length (4-32 notes): "))
+    scale_name = input("Decide Scale C Major or A Minor: ")
+    length = int(input("Decide Length of Melody 4-32 Notes: "))
 
     scale = Scale(scale_name.split()[0], scale_name.split()[1])
     melody_generator = MelodyGenerator(scale, length)
@@ -130,8 +137,9 @@ def main():
 
     midi_manager = MIDIFileManager()
     midi_manager.write_melody(melody)
-    midi_manager.write_chords(chords)  # ✅ Ensure chords are written
+    midi_manager.write_chords(melody, chords)  # ✅ Ensure correct alignment
     midi_manager.save_file()
+
 
     # Manual output formatting
     print(f"\nScale: {scale.root} {scale.mode}")
@@ -146,4 +154,5 @@ def main():
     print(f"\nMIDI file saved as {midi_manager.filename}")
 
 if __name__ == "__main__":
-    main()C 
+    main()
+
