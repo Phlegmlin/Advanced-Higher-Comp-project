@@ -8,7 +8,7 @@ sudo mysql -u root -p
 
 
 CREATE USER 'adi'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON products.* TO 'adi'@'localhost';
+GRANT ALL PRIVILEGES ON music_database.* TO 'adi'@'localhost';
 FLUSH PRIVILEGES;
 
 ALTER USER 'adi'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
@@ -60,7 +60,6 @@ CREATE TABLE ChordTones (
     FOREIGN KEY (chord_id) REFERENCES Chords(chord_id),
     FOREIGN KEY (note_id) REFERENCES Notes(note_id)
 );
----------------------------------------------
 
 CREATE TABLE MIDI_Files (
     midi_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -69,15 +68,17 @@ CREATE TABLE MIDI_Files (
     duration INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+---------------------------------------------
+INSERT INTO Scales (name, root, type) VALUES 
+("C Major", "C", "Major"),
+("A Minor", "A", "Minor");
 
-INSERT INTO Scales (name, root, type)
-VALUES ("C Major", "C", "Major")
+INSERT INTO Notes (name, pitch) VALUES 
+("C", 60), ("D", 62), ("E", 64), ("F", 65), ("G", 67), ("A", 69), ("B", 71);
 
-INSERT INTO Notes (name, pitch)
-VALUES ("C", 60), ("C#", 61), ("D", 62), ("D#", 63), ("E", 64), ("F", 65), ("F#", 66), ("G", 67), ("G#", 68), ("A", 69), ("A#", 70), ("B", 71);
-
-INSERT INTO ScaleNotes (scale_id, note_id, pitch)
-VALUES (1, 1, 60), (1, 3, 62), (1, 5, 64), (1, 6, 65), (1, 8, 67), (1, 10, 69), (1, 12, 71)
+INSERT INTO ScaleNotes (scale_id, note_id, pitch) VALUES
+(1, 1, 60), (1, 2, 62), (1, 3, 64), (1, 4, 65), (1, 5, 67), (1, 6, 69), (1, 7, 71),
+(2, 6, 69), (2, 7, 71), (2, 1, 60), (2, 2, 62), (2, 3, 64), (2, 4, 65), (2, 5, 67);
 
 ---possibly uneeded-----
 INSERT INTO Chords (scale_id, name)
