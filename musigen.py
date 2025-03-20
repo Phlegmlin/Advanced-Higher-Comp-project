@@ -125,33 +125,20 @@ class MIDIFileManager:
 ##MAIN##
 def main():
     print("Running Musigen \n")
-    scale_name = input("Decide Scale C Major or A Minor: ")
+    scale_name = input("Decide Scale From \nC Ionian \nD Dorian \nE Phrygian \nF Lydian \nG Mixolydian \nA Aeolian \nB Locrian \n: ")
     length = int(input("Decide Length of Melody 4-32 Notes: "))
 
     scale = Scale(scale_name.split()[0], scale_name.split()[1])
     melody_generator = MelodyGenerator(scale, length)
-    melody = melody_generator.generate_melody()  # ✅ Define melody before using it
+    melody = melody_generator.generate_melody()
 
-    chord_generator = ChordGenerator(melody, scale)  # ✅ Now melody is defined
+    chord_generator = ChordGenerator(melody, scale)
     chords = chord_generator.generate_chords()
 
     midi_manager = MIDIFileManager()
     midi_manager.write_melody(melody)
-    midi_manager.write_chords(melody, chords)  # ✅ Ensure correct alignment
+    midi_manager.write_chords(melody, chords)
     midi_manager.save_file()
-
-
-    # Manual output formatting
-    print(f"\nScale: {scale.root} {scale.mode}")
-    print("Generated Melody:")
-    for note in melody:
-        print(f"{note.name} ({note.pitch})", end=" ")
-
-    print("\nGenerated Chords:")
-    for chord in chords:
-        print([f"{note.name} ({note.pitch})" for note in chord])
-
-    print(f"\nMIDI file saved as {midi_manager.filename}")
 
 if __name__ == "__main__":
     main()
