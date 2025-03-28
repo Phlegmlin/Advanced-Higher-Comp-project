@@ -136,31 +136,32 @@ class MIDIFileManager:
 
 ##MAIN##
 def main():
-    running = True
-    while running:
+    run = True
+    while run:
         print("Musigen\n")
-        valid_scale = False
-        while not valid_scale:
-            scale_name = input("Decide Scale From \nC Ionian \nD Dorian \nE Phrygian \nF Lydian \nG Mixolydian \nA Aeolian \nB Locrian \n: ")
-            if not scale_name or len(scale_name.split()) != 2:
-                print("Error: Please enter a valid scale from the aformentioned options")
-                continue  
-            if scaleExists(scale_name):
-                valid_scale = True
+        scale_valid = False
+        while not scale_valid:
+            print("Available Scales:")
+            print("C Ionian \nD Dorian \nE Phrygian \nF Lydian \nG Mixolydian \nA Aeolian \nB Locrian")
+            scale_input = input("Enter scale: ")
+            if len(scale_input.split()) == 2 and scaleExists(scale_input):
+                scale_valid = True
             else:
-                print(f"Error: '{scale_name}' is not a valid scale in the database.")
-        valid_length = False
-        while not valid_length:
-            try:
-                length = int(input("Decide Length of Melody 4-32 Notes: "))
-                if 4 <= length <= 32:
-                    valid_length = True
-                else:
-                    print("Error: Length must be between 4 and 32 notes.")
-            except ValueError:
-                print("Error: Please enter a valid number.")
+                print("Error: Choose a Valid Scale")
         
-        root, mode = scale_name.split()[0], scale_name.split()[1]
+        length_valid = False
+        while not length_valid:
+            length_input = input("Enter melody length (4-32): ")
+            if length_input.isdigit():
+                length = int(length_input)
+                if 4 <= length <= 32:
+                    length_valid = True
+                else:
+                    print("Error: Length must be between 4 and 32.")
+            else:
+                print("Error: Please enter a number.")
+        
+        root, mode = scale_input.split()[0], scale_input.split()[1]
         scale = Scale(root, mode)
         melody_generator = MelodyGenerator(scale, length)
         melody = melody_generator.generateMelody()
@@ -173,13 +174,12 @@ def main():
         midi_manager.write_chords(melody, chords)
         midi_manager.save_file()
         
-        print("MIDI file successfully created as 'output.mid'")
+        print("MIDI file created as 'musigen.mid'")
         
-        
-        run_again = input("Would you like to generate another melody? (y/n): ").lower()
-        if run_again != 'y':
-            running = False
-            print("Thank you for using Musigen!")
+        again = input("Generate another melody? (y/n): ")
+        if again.lower() != "y":
+            run = False
+            print("Program Ended")
 
 if __name__ == "__main__":
     main()

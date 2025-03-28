@@ -20,7 +20,6 @@ FLUSH PRIVILEGES;
 CREATE DATABASE music_database;
 USE music_database;
 
----- only needs ran once / dont run again 
 CREATE TABLE Scales (
     scale_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -44,10 +43,6 @@ CREATE TABLE ScaleNotes (
 );
 
 INSERT INTO Scales (name, root, type) VALUES 
-("C Major", "C", "Major"),
-("A Minor", "A", "Minor");
-
-INSERT INTO Scales (name, root, type) VALUES 
 ("C Ionian", "C", "Ionian"),
 ("D Dorian", "D", "Dorian"),
 ("E Phrygian", "E", "Phrygian"),
@@ -60,54 +55,54 @@ INSERT INTO Notes (name, pitch) VALUES
 ("C", 60), ("D", 62), ("E", 64), ("F", 65), ("G", 67), ("A", 69), ("B", 71);
 
 INSERT INTO ScaleNotes (scale_id, note_id, pitch) VALUES
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 1, 60),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 2, 62),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 3, 64),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 4, 65),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 5, 67),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 6, 69),  
-((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 7, 71);
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 1, 62),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 2, 64),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 3, 65),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 4, 67),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 5, 69),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 6, 71),  
-((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 7, 60);
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 1, 64),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 2, 65),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 3, 67),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 4, 69),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 5, 71),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 6, 60),  
-((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 7, 62);
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 1, 65),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 2, 67),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 3, 69),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 4, 71),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 5, 60),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 6, 62),  
-((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 7, 64);
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 1, 67),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 2, 69),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 3, 71),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 4, 60),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 5, 62),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 6, 64),  
-((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 7, 65);
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 1, 69),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 2, 71),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 3, 60),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 4, 62),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 5, 64),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 6, 65),  
-((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 7, 67);
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 1, 71),  
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 2, 60),  
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 3, 62),  
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 4, 64),  
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 5, 65),  
-((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 6, 67),  
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 1, 60),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 2, 62),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 3, 64),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 4, 65),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 5, 67),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 6, 69),
+((SELECT scale_id FROM Scales WHERE name = "C Ionian"), 7, 71),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 1, 62),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 2, 64),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 3, 65),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 4, 67),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 5, 69),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 6, 71),
+((SELECT scale_id FROM Scales WHERE name = "D Dorian"), 7, 60),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 1, 64),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 2, 65),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 3, 67),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 4, 69),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 5, 71),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 6, 60),
+((SELECT scale_id FROM Scales WHERE name = "E Phrygian"), 7, 62),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 1, 65),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 2, 67),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 3, 69),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 4, 71),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 5, 60),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 6, 62),
+((SELECT scale_id FROM Scales WHERE name = "F Lydian"), 7, 64),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 1, 67),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 2, 69),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 3, 71),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 4, 60),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 5, 62),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 6, 64),
+((SELECT scale_id FROM Scales WHERE name = "G Mixolydian"), 7, 65),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 1, 69),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 2, 71),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 3, 60),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 4, 62),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 5, 64),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 6, 65),
+((SELECT scale_id FROM Scales WHERE name = "A Aeolian"), 7, 67),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 1, 71),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 2, 60),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 3, 62),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 4, 64),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 5, 65),
+((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 6, 67),
 ((SELECT scale_id FROM Scales WHERE name = "B Locrian"), 7, 69);
 
 
